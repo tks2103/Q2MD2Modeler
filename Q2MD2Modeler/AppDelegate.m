@@ -2,7 +2,7 @@
 //  AppDelegate.m
 //  Q2MD2Modeler
 //
-//  Created by Tanoy Sinha on 10/4/12.
+//  Created by Tanoy Sinha on 10/3/12.
 //  Copyright (c) 2012 Tanoy Sinha. All rights reserved.
 //
 
@@ -12,10 +12,43 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    // Override point for customization after application launch.
+    [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationNone];
+    
+    EAGLContext *context = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES2];
+    [EAGLContext setCurrentContext:context];
+    
+    glEnable(GL_DEPTH_TEST);
+    
+    GLKView *view = [[GLKView alloc] initWithFrame:[[UIScreen mainScreen] bounds] context:context];
+    view.drawableDepthFormat = GLKViewDrawableDepthFormat16;
+    view.delegate = self;
+    view.context = context;
+    
+    
+    Q2SceneController *controller = [[Q2SceneController alloc] init];
+    controller.delegate = self;
+    controller.view = view;
+    //    controller.preferredFramesPerSecond = 30;
+    
+    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    self.window.rootViewController = controller;
+    [self.window makeKeyAndVisible];
+    
+    scene = [[Q2Scene alloc] init];
+    
     return YES;
 }
-							
+
+- (void)glkViewControllerUpdate:(GLKViewController *)controller
+{
+    [scene update];
+}
+
+- (void)glkView:(GLKView *)view drawInRect:(CGRect)rect
+{
+    [scene render];
+}
+
 - (void)applicationWillResignActive:(UIApplication *)application
 {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
@@ -24,7 +57,7 @@
 
 - (void)applicationDidEnterBackground:(UIApplication *)application
 {
-    // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later. 
+    // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
 }
 

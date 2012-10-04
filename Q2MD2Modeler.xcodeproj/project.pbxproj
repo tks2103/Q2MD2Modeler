@@ -15,7 +15,12 @@
 		8746ADB4161E47FE002D0EC1 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8746ADB3161E47FE002D0EC1 /* AppDelegate.m */; };
 		8746ADB7161E47FE002D0EC1 /* MainStoryboard_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8746ADB5161E47FE002D0EC1 /* MainStoryboard_iPhone.storyboard */; };
 		8746ADBA161E47FE002D0EC1 /* MainStoryboard_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8746ADB8161E47FE002D0EC1 /* MainStoryboard_iPad.storyboard */; };
-		8746ADBD161E47FE002D0EC1 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8746ADBC161E47FE002D0EC1 /* ViewController.m */; };
+		8746ADC5161E4859002D0EC1 /* Q2SceneController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8746ADC4161E4859002D0EC1 /* Q2SceneController.m */; };
+		8746ADC8161E488E002D0EC1 /* Q2Sprite.m in Sources */ = {isa = PBXBuildFile; fileRef = 8746ADC7161E488E002D0EC1 /* Q2Sprite.m */; };
+		8746ADCB161E48B6002D0EC1 /* Q2Scene.m in Sources */ = {isa = PBXBuildFile; fileRef = 8746ADCA161E48B6002D0EC1 /* Q2Scene.m */; };
+		8746ADCE161E491F002D0EC1 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8746ADCD161E491F002D0EC1 /* OpenGLES.framework */; };
+		8746ADD0161E4925002D0EC1 /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8746ADCF161E4925002D0EC1 /* GLKit.framework */; };
+		8746ADD2161E492D002D0EC1 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8746ADD1161E492D002D0EC1 /* QuartzCore.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,8 +36,16 @@
 		8746ADB3161E47FE002D0EC1 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		8746ADB6161E47FE002D0EC1 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard_iPhone.storyboard; sourceTree = "<group>"; };
 		8746ADB9161E47FE002D0EC1 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard_iPad.storyboard; sourceTree = "<group>"; };
-		8746ADBB161E47FE002D0EC1 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		8746ADBC161E47FE002D0EC1 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		8746ADC3161E4859002D0EC1 /* Q2SceneController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Q2SceneController.h; sourceTree = "<group>"; };
+		8746ADC4161E4859002D0EC1 /* Q2SceneController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Q2SceneController.m; sourceTree = "<group>"; };
+		8746ADC6161E488E002D0EC1 /* Q2Sprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Q2Sprite.h; sourceTree = "<group>"; };
+		8746ADC7161E488E002D0EC1 /* Q2Sprite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Q2Sprite.m; sourceTree = "<group>"; };
+		8746ADC9161E48B6002D0EC1 /* Q2Scene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Q2Scene.h; sourceTree = "<group>"; };
+		8746ADCA161E48B6002D0EC1 /* Q2Scene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Q2Scene.m; sourceTree = "<group>"; };
+		8746ADCC161E48E8002D0EC1 /* MD2Helper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MD2Helper.h; sourceTree = "<group>"; };
+		8746ADCD161E491F002D0EC1 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
+		8746ADCF161E4925002D0EC1 /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
+		8746ADD1161E492D002D0EC1 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -40,6 +53,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8746ADD2161E492D002D0EC1 /* QuartzCore.framework in Frameworks */,
+				8746ADD0161E4925002D0EC1 /* GLKit.framework in Frameworks */,
+				8746ADCE161E491F002D0EC1 /* OpenGLES.framework in Frameworks */,
 				8746ADA4161E47FE002D0EC1 /* UIKit.framework in Frameworks */,
 				8746ADA6161E47FE002D0EC1 /* Foundation.framework in Frameworks */,
 				8746ADA8161E47FE002D0EC1 /* CoreGraphics.framework in Frameworks */,
@@ -69,6 +85,9 @@
 		8746ADA2161E47FE002D0EC1 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				8746ADD1161E492D002D0EC1 /* QuartzCore.framework */,
+				8746ADCF161E4925002D0EC1 /* GLKit.framework */,
+				8746ADCD161E491F002D0EC1 /* OpenGLES.framework */,
 				8746ADA3161E47FE002D0EC1 /* UIKit.framework */,
 				8746ADA5161E47FE002D0EC1 /* Foundation.framework */,
 				8746ADA7161E47FE002D0EC1 /* CoreGraphics.framework */,
@@ -81,10 +100,15 @@
 			children = (
 				8746ADB2161E47FE002D0EC1 /* AppDelegate.h */,
 				8746ADB3161E47FE002D0EC1 /* AppDelegate.m */,
+				8746ADCC161E48E8002D0EC1 /* MD2Helper.h */,
+				8746ADC3161E4859002D0EC1 /* Q2SceneController.h */,
+				8746ADC4161E4859002D0EC1 /* Q2SceneController.m */,
+				8746ADC9161E48B6002D0EC1 /* Q2Scene.h */,
+				8746ADCA161E48B6002D0EC1 /* Q2Scene.m */,
+				8746ADC6161E488E002D0EC1 /* Q2Sprite.h */,
+				8746ADC7161E488E002D0EC1 /* Q2Sprite.m */,
 				8746ADB5161E47FE002D0EC1 /* MainStoryboard_iPhone.storyboard */,
 				8746ADB8161E47FE002D0EC1 /* MainStoryboard_iPad.storyboard */,
-				8746ADBB161E47FE002D0EC1 /* ViewController.h */,
-				8746ADBC161E47FE002D0EC1 /* ViewController.m */,
 				8746ADAA161E47FE002D0EC1 /* Supporting Files */,
 			);
 			path = Q2MD2Modeler;
@@ -167,7 +191,9 @@
 			files = (
 				8746ADB0161E47FE002D0EC1 /* main.m in Sources */,
 				8746ADB4161E47FE002D0EC1 /* AppDelegate.m in Sources */,
-				8746ADBD161E47FE002D0EC1 /* ViewController.m in Sources */,
+				8746ADC5161E4859002D0EC1 /* Q2SceneController.m in Sources */,
+				8746ADC8161E488E002D0EC1 /* Q2Sprite.m in Sources */,
+				8746ADCB161E48B6002D0EC1 /* Q2Scene.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
