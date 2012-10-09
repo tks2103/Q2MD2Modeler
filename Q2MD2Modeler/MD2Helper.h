@@ -13,6 +13,23 @@
 
 typedef struct
 {
+    unsigned char       manufacturer;
+    unsigned char       version;
+    unsigned char       encoding;
+    unsigned char       bitsperpixel;
+    short               window[4];
+    short               dpi[2];
+    unsigned char       colormap[48];
+    unsigned char       reserved;
+    unsigned char       nplanes;
+    short               bytesperline;
+    short               paletteinfo;
+    short               screensize[2];
+    unsigned char       filler[54];
+} pcx_header_t;
+
+typedef struct
+{
     int     ident;              // magic number. must be equal to "IDP2"
     int     version;            // md2 version. must be equal to 8
     
@@ -38,10 +55,20 @@ typedef struct
 
 typedef struct
 {
+    char name[64];
+} skin_t;
+
+typedef struct
+{
     unsigned char   v[3];                // compressed vertex (x, y, z) coordinates
     unsigned char   normal_index;    // index to a normal vector for the lighting
-    
 } vertex_t;
+
+typedef struct
+{
+    short s;
+    short t;
+} texture_coord_t;
 
 typedef struct
 {

@@ -24,7 +24,6 @@
     view.delegate = self;
     view.context = context;
     
-    
     Q2SceneController *controller = [[Q2SceneController alloc] init];
     controller.delegate = self;
     controller.view = view;

@@ -35,7 +35,6 @@
             self.vertexColors[i*3+1] = GLKVector4Make(0, 1, 0, 1);
             self.vertexColors[i*3+2] = GLKVector4Make(0, 0, 1, 1);
         }
-
     }
     return self;
 }
@@ -48,11 +47,17 @@
     effect.transform.projectionMatrix = GLKMatrix4MakePerspective(45.0f, 2.0f/3.0f, 10.0f, 200.0f);
     
     GLKMatrix4 modelviewMatrix = GLKMatrix4Multiply(GLKMatrix4MakeXRotation(-M_PI/2), GLKMatrix4MakeZRotation(-M_PI/2));
-    //modelviewMatrix = GLKMatrix4Multiply(GLKMatrix4MakeYRotation(zrotation), modelviewMatrix);
     modelviewMatrix = GLKMatrix4Multiply(GLKMatrix4MakeTranslation(0, 0, -100), modelviewMatrix);
     effect.transform.modelviewMatrix = modelviewMatrix;
     
+    effect.texture2d0.envMode = GLKTextureEnvModeReplace;
+    effect.texture2d0.target = GLKTextureTarget2D;
+    effect.texture2d0.name = model.texture.name;
+    
     [effect prepareToDraw];
+    
+    glEnableVertexAttribArray(GLKVertexAttribTexCoord0);
+    glVertexAttribPointer(GLKVertexAttribTexCoord0, 2, GL_FLOAT, GL_FALSE, 0, [model calculatedTextureCoords]);
     
     glEnableVertexAttribArray(GLKVertexAttribPosition);
     glVertexAttribPointer(GLKVertexAttribPosition, 3, GL_FLOAT, GL_FALSE, 0, [model calculatedFrameVertices]);
@@ -63,11 +68,11 @@
     glDrawArrays(GL_TRIANGLES, 0, model.header.num_triangles*3);
     glDisableVertexAttribArray(GLKVertexAttribColor);
     glDisableVertexAttribArray(GLKVertexAttribPosition);
+    glDisableVertexAttribArray(GLKVertexAttribTexCoord0);
     glDisable(GL_BLEND);
 }
 
 -(void) update {
-    
     xrotation += M_PI / 96;
     if (xrotation >= 2 * M_PI) {
         xrotation -= 2 * M_PI;
@@ -85,7 +90,6 @@
         currentFrame = 0;
     }
     [model animateFrameVerticesForFrame:currentFrame withInterpolation:interp];
-    
 }
 
 @end

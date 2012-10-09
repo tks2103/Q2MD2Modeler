@@ -10,13 +10,20 @@
 
 @implementation MD2Model
 
-@synthesize header, frames, triangles, calculatedFrameVertices;
+@synthesize header, frames, triangles, calculatedFrameVertices, calculatedTextureCoords, texture;
 
 -(id) initWithFile:(NSString *)fileName {
     self = [super init];
     if (self) {
         [self loadFile:fileName];
         [self allocateMemory];
+        UIImage *image = [[UIImage alloc] initWithContentsOfFile:@"/Users/tsinha/Downloads/q2mdl-storm/storm.jpg"];
+        NSError *error;
+        
+        texture = [GLKTextureLoader textureWithCGImage:image.CGImage options:nil error:&error];
+        if (error) {
+            NSLog(@"error loading texture %@", error);
+        }
         [self generateVertices];
     }
     return self;
@@ -39,6 +46,8 @@
     
     triangles = (triangle_t *) malloc(sizeof(triangle_t)*header.num_triangles);
     frames = (frame_t *) malloc(sizeof(frame_t)*header.num_frames);
+    skins = (skin_t *) malloc(sizeof(skin_t)*header.num_skins);
+    texture_coords = (texture_coord_t *) malloc(sizeof(texture_coord_t)*header.num_texture_coords);
     
     fseek(f, header.offset_triangles, SEEK_SET);
     fread(triangles, sizeof(triangle_t), header.num_triangles, f);
@@ -53,11 +62,18 @@
         fread(frames[i].vertices, sizeof(vertex_t), header.num_vertices, f);
     }
     
+    fseek(f, header.offset_skins, SEEK_SET);
+    fread(skins, sizeof(skin_t), header.num_skins, f);
+    
+    fseek(f, header.offset_texture_coords, SEEK_SET);
+    fread(texture_coords, sizeof(texture_coord_t), header.num_texture_coords, f);
+    
     fclose(f);
 }
 
 -(void) allocateMemory {
     calculatedFrameVertices = malloc(sizeof(GLKVector3) * header.num_triangles * 3 );
+    calculatedTextureCoords = malloc(sizeof(GLKVector2) * header.num_triangles * 3 );
     baseVertices = malloc(sizeof(GLKVector3) * header.num_frames * header.num_vertices);
 }
 
@@ -80,6 +96,13 @@
         calculatedFrameVertices[i*3]   = baseVertices[offset + tTri.vertex[0]];
         calculatedFrameVertices[i*3+1] = baseVertices[offset + tTri.vertex[1]];
         calculatedFrameVertices[i*3+2] = baseVertices[offset + tTri.vertex[2]];
+        
+        calculatedTextureCoords[i*3]   = GLKVector2Make(texture_coords[triangles[i].st[0]].s / (float)header.skinwidth,
+                                                        texture_coords[triangles[i].st[0]].t / (float)header.skinheight);
+        calculatedTextureCoords[i*3+1] = GLKVector2Make(texture_coords[triangles[i].st[1]].s / (float)header.skinwidth,
+                                                        texture_coords[triangles[i].st[1]].t / (float)header.skinheight);
+        calculatedTextureCoords[i*3+2] = GLKVector2Make(texture_coords[triangles[i].st[2]].s / (float)header.skinwidth,
+                                                        texture_coords[triangles[i].st[2]].t / (float)header.skinheight);
     }
 }
 

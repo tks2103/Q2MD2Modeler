@@ -22,6 +22,7 @@
 		8746ADD0161E4925002D0EC1 /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8746ADCF161E4925002D0EC1 /* GLKit.framework */; };
 		8746ADD2161E492D002D0EC1 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8746ADD1161E492D002D0EC1 /* QuartzCore.framework */; };
 		87FC924316237A230078CBBA /* MD2Model.m in Sources */ = {isa = PBXBuildFile; fileRef = 87FC924216237A230078CBBA /* MD2Model.m */; };
+		87FC92471624AC6B0078CBBA /* MD2Texture.m in Sources */ = {isa = PBXBuildFile; fileRef = 87FC92461624AC6A0078CBBA /* MD2Texture.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -49,6 +50,8 @@
 		8746ADD1161E492D002D0EC1 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		87FC924116237A230078CBBA /* MD2Model.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MD2Model.h; sourceTree = "<group>"; };
 		87FC924216237A230078CBBA /* MD2Model.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MD2Model.m; sourceTree = "<group>"; };
+		87FC92451624AC6A0078CBBA /* MD2Texture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MD2Texture.h; sourceTree = "<group>"; };
+		87FC92461624AC6A0078CBBA /* MD2Texture.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MD2Texture.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -112,6 +115,8 @@
 				8746ADCC161E48E8002D0EC1 /* MD2Helper.h */,
 				87FC924116237A230078CBBA /* MD2Model.h */,
 				87FC924216237A230078CBBA /* MD2Model.m */,
+				87FC92451624AC6A0078CBBA /* MD2Texture.h */,
+				87FC92461624AC6A0078CBBA /* MD2Texture.m */,
 				8746ADB5161E47FE002D0EC1 /* MainStoryboard_iPhone.storyboard */,
 				8746ADB8161E47FE002D0EC1 /* MainStoryboard_iPad.storyboard */,
 				8746ADAA161E47FE002D0EC1 /* Supporting Files */,
@@ -200,6 +205,7 @@
 				8746ADC8161E488E002D0EC1 /* Q2Sprite.m in Sources */,
 				8746ADCB161E48B6002D0EC1 /* Q2Scene.m in Sources */,
 				87FC924316237A230078CBBA /* MD2Model.m in Sources */,
+				87FC92471624AC6B0078CBBA /* MD2Texture.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
