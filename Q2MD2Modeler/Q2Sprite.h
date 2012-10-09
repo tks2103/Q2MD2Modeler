@@ -14,6 +14,8 @@
 @interface Q2Sprite : NSObject {
     NSMutableData *vertexColorData;
     int num_tris;
+    int currentFrame;
+    float interp;
     float xrotation;
     float zrotation;
     
@@ -21,6 +23,7 @@
 }
 @property float xrotation;
 @property float zrotation;
+@property (readonly) GLKVector4* vertexColors;
 
 -(id) initWithFile:(NSString*)fileName;
 -(void)render;

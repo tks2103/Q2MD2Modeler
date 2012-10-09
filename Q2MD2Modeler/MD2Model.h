@@ -24,9 +24,11 @@
 
 -(id) initWithFile:(NSString*) fileName;
 -(void) loadFile:(NSString*) fileName;
+-(void) allocateMemory;
 -(void) generateVertices;
 -(void) calculateFrameVerticesForFrame:(int)frameNum;
--(GLKVector3*) getVerticesForFrame:(int)frameNum;
+-(void) animateFrameVerticesForFrame:(int)frameNum withInterpolation:(float) interp;
+-(GLKVector3) interpolateVertex:(GLKVector3) vCurr with:(GLKVector3) vNext atInterpolation:(float) interp;
 
 
 

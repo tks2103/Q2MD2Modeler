@@ -13,8 +13,8 @@
 -(id) init {
     self = [super init];
     if (self) {
-        //sprite = [[Q2Sprite alloc] initWithFile:@"/Users/tsinha/Downloads/q2mdl-storm/tris.md2"];
-        sprite = [[Q2Sprite alloc] initWithFile:@"/Users/tsinha/Downloads/quake2/baseq2/players/male/w_railgun.md2"];
+        sprite = [[Q2Sprite alloc] initWithFile:@"/Users/tsinha/Downloads/q2mdl-storm/tris.md2"];
+        //sprite = [[Q2Sprite alloc] initWithFile:@"/Users/tsinha/Downloads/quake2/baseq2/players/male/w_railgun.md2"];
     }
     return self;
 }

@@ -10,20 +10,14 @@
 
 @implementation MD2Model
 
-@synthesize header, frames, triangles;
-
--(GLKVector3*) calculatedFrameVertices {
-    return calculatedFrameVertices;
-}
+@synthesize header, frames, triangles, calculatedFrameVertices;
 
 -(id) initWithFile:(NSString *)fileName {
     self = [super init];
     if (self) {
         [self loadFile:fileName];
-        calculatedFrameVertices = malloc(sizeof(GLKVector3) * header.num_triangles * 3 );
-        baseVertices = malloc(sizeof(GLKVector3) * header.num_frames * header.num_vertices);
+        [self allocateMemory];
         [self generateVertices];
-        
     }
     return self;
 }
@@ -62,6 +56,11 @@
     fclose(f);
 }
 
+-(void) allocateMemory {
+    calculatedFrameVertices = malloc(sizeof(GLKVector3) * header.num_triangles * 3 );
+    baseVertices = malloc(sizeof(GLKVector3) * header.num_frames * header.num_vertices);
+}
+
 -(void) generateVertices {
     for (int i = 0 ; i < header.num_frames; i++) {
         GLKVector3 scale = frames[i].scale;
@@ -84,18 +83,35 @@
     }
 }
 
--(GLKVector3*) getVerticesForFrame:(int)frameNum {
-    GLKVector3 rVertices[header.num_triangles * 3];
-    int offset = frameNum * header.num_vertices;
+-(void) animateFrameVerticesForFrame:(int)frameNum withInterpolation:(float)interp {
+    int offsetCurr = frameNum * header.num_vertices;
+    int offsetNext = (frameNum + 1) * header.num_vertices;
     for (int i = 0; i < header.num_triangles; i++) {
         triangle_t tTri = triangles[i];
-        rVertices[i*3]   = baseVertices[offset + tTri.vertex[0]];
-        rVertices[i*3+1] = baseVertices[offset + tTri.vertex[1]];
-        rVertices[i*3+2] = baseVertices[offset + tTri.vertex[2]];
+        
+        GLKVector3 vCurr[3], vNext[3];
+        vCurr[0] = baseVertices[offsetCurr + tTri.vertex[0]];
+        vCurr[1] = baseVertices[offsetCurr + tTri.vertex[1]];
+        vCurr[2] = baseVertices[offsetCurr + tTri.vertex[2]];
+        
+        vNext[0] = baseVertices[offsetNext + tTri.vertex[0]];
+        vNext[1] = baseVertices[offsetNext + tTri.vertex[1]];
+        vNext[2] = baseVertices[offsetNext + tTri.vertex[2]];
+        
+        calculatedFrameVertices[i*3]   = [self interpolateVertex:vCurr[0] with:vNext[0] atInterpolation:interp];
+        calculatedFrameVertices[i*3+1] = [self interpolateVertex:vCurr[1] with:vNext[1] atInterpolation:interp];
+        calculatedFrameVertices[i*3+2] = [self interpolateVertex:vCurr[2] with:vNext[2] atInterpolation:interp];
     }
-    return rVertices;
 }
 
-
+-(GLKVector3) interpolateVertex:(GLKVector3)vCurr with:(GLKVector3)vNext atInterpolation:(float)interp {
+    GLKVector3 v;
+    
+    v.v[0] = vCurr.v[0] + interp * (vNext.v[0] - vCurr.v[0]);
+    v.v[1] = vCurr.v[1] + interp * (vNext.v[1] - vCurr.v[1]);
+    v.v[2] = vCurr.v[2] + interp * (vNext.v[2] - vCurr.v[2]);
+    
+    return v;
+}
 
 @end
